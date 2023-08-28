@@ -2,8 +2,6 @@ import numpy as np
 import math
 import pandas as pd
 from pathlib import Path
-import json
-
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 from matplotlib import cm, colors
@@ -21,7 +19,7 @@ def draw_wafer_plot(data, title):
     notch_coords = np.array([[2*r, r - s/2], [2*r, r + s/2], [2*r - 0.5*s, r]])
     
     map_fdir = Path().absolute().parent
-    df = pd.read_csv(map_fdir / 'dione_wafermap.csv')
+    df = pd.read_csv(map_fdir / 'map_files' / 'wafer_map' /'dione_wafermap.csv')
     wm = {}
     for i, row in df.iterrows():
         wm[int(row['reticle'])] = row['x']/1000, row['y']/1000 # unit mm
@@ -33,7 +31,7 @@ def draw_wafer_plot(data, title):
     vmin = np.min(vals)
     
     # get a colormap and a norm
-    cmp = mpl.colormaps['RdBu_r']
+    cmp = mpl.colormaps['coolwarm']
     norm = colors.Normalize(vmin, vmax)
     
     # create all reticles
@@ -55,7 +53,7 @@ def draw_wafer_plot(data, title):
         ax.text(ret[0] + 0.2 * w, ret[1] + 0.8 * h, id, fontsize=10, weight='bold', ha='center', va='center')
         if id in tested_rets:
             l = data[id]
-            ax.text(ret[0] + 0.5 * w, ret[1] + 0.2 * h, f'{l:.3f}', fontsize=10, ha='center', va='center')
+            ax.text(ret[0] + 0.5 * w, ret[1] + 0.2 * h, f'{l:.3f}', color='0', fontsize=10, ha='center', va='center')
         ax.add_patch(ret[2])
     ax.set_aspect("equal")
     ax.set_xlim([0, 2*r])

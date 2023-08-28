@@ -2,8 +2,6 @@ import numpy as np
 import math
 import pandas as pd
 from pathlib import Path
-import json
-
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 from matplotlib import cm, colors
