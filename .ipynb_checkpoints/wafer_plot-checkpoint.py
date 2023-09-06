@@ -19,7 +19,8 @@ def draw_wafer_plot(data, title):
     notch_coords = np.array([[2*r, r - s/2], [2*r, r + s/2], [2*r - 0.5*s, r]])
     
     map_fdir = Path().absolute().parent
-    df = pd.read_csv(map_fdir / 'map_files' / 'wafer_map' /'dione_wafermap.csv')
+    # df = pd.read_csv(map_fdir / 'map_files' / 'wafer_map' / 'dione_wafermap.csv') # on IDB desktop
+    df = pd.read_csv(map_fdir / 'dione_wafermap.csv') # on MacBook Pro
     wm = {}
     for i, row in df.iterrows():
         wm[int(row['reticle'])] = row['x']/1000, row['y']/1000 # unit mm
